@@ -35,3 +35,5 @@ Installation of Linux "nc" command:  "sudo yum install -y nc" on Oracle Enterpri
 
 - Log file "oraupdown.log" - located in $HOME directory of the OS account running the script.
 - Log file "oraupdown_nc.log" contains output from Linux "nc" command.
+
+On the database VM, entries in an OS account's "cron" table can be listed using the "crontab -l" command.  The existence of the running "oraupdown.sh" script can be verified using a Linux command like "ps -eaf | grep oraupdown".  The status of the designated network port can be verified using either the Linux command "netstat -a | grep 63000" or the Linux command "ps -eaf | grep nc".
