@@ -35,7 +35,11 @@ Using crontab in this manner is merely a suggestion, suggested mainly because it
 
 # Dependencies:
 
-Installation of Linux "nc" command:  "sudo yum install -y nc" on Oracle Enterprise Linux (or equivalent on other Linux variant)
+Installation of Linux "nc" command on the VM on which the Oracle database instances reside...
+
+    sudo yum install -y nc
+
+...on Oracle Enterprise Linux or Red Hat Enterprise Linux (or equivalent dnf, apt-get, or other Linux variant on the yum command).
 
 # Diagnostics:
 
@@ -43,6 +47,18 @@ Installation of Linux "nc" command:  "sudo yum install -y nc" on Oracle Enterpri
 - Log file "oraupdown_nc.log" contains output from Linux "nc" command.
 
 On the database VM, entries in an OS account's "cron" table can be listed using the "crontab -l" command.  The existence of the running "oraupdown.sh" script can be verified using a Linux command like "ps -eaf | grep oraupdown".  The status of the designated network port can be verified using either the Linux command "netstat -a | grep 63000" or the Linux command "ps -eaf | grep nc".
+
+# Oracle "keepalive" functionality:
+
+Azure load balancers include idle timeout functionality, so it is important to use keepalive functionality to ensure that the Azure load balancer does not close a database connection due to lack of activity.
+
+To do this, please edit the Oracle networking configuration file named "sqlnet.ora", which is typically located in the subdirectory "$ORACLE_HOME/network/admin" on the VM on which the Oracle database instance resides, to set the configuration parameter "SQLNET.EXPIRE_TIME" so that the Oracle database instance will send a keepalive network packet  minutes...
+
+    sqlnet.expire_time = 10
+
+...if the parameter is already set, please ensure that the value is 10 minutes or less?
+
+Please remember that this needs to be set on all of the VMs in the backend pool of the Azure load balancer, which are the VMs on which PRIMARY and PHYSICAL STANDBY database instances reside.  Please note that, if this parameter is not set, the VIP will work correctly initially, but idle connections will be automatically removed by the Azure load balancer after 20 minutes.  This could manifest as a wide variety of Oracle errors which indicate that the network connection dropped suddenly.
 
 # Creation of the Azure load balancer:
 
