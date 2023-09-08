@@ -77,7 +77,7 @@ These instructions will assume the use of the wizard for creating an Azure load 
 - click NEXT to go to Frontend IP Configuration...
 ## 2. Frontend IP configuration
 - Click "+" to add a frontend IP configuration, which will bring up a dialog box...
-- Name (<i>enter the name of the LB frontend IP configuration, perhaps something like "{LBname}-front01"?</i>)
+- Name (<i>enter the name of the LB frontend IP configuration, perhaps something like "</i>{LBname}<i>-front01"?</i>)
 - Virtual Network (<i>choose the vnet on which the Oracle DataGuard VMs reside</i>)
 - Subnet (<i>choose the subnet on which the Oracle DataGuard VMs reside</i>)
 - Assignment (<i>choose</i> "static")
@@ -87,7 +87,7 @@ These instructions will assume the use of the wizard for creating an Azure load 
 - click NEXT to go to Backend Pools...
 ## 3. Backend pools
 - Click "+" to add a backend pool, which will bring up a dialog box...
-- Name (<i>enter the name of the LB backend pool, perhaps something like "{LBname}-back01"?</i>)
+- Name (<i>enter the name of the LB backend pool, perhaps something like "</i>{LBname}<i>-back01"?</i>)
 - Virtual Network (<i>choose the vnet on which the Oracle DataGuard VMs reside</i>)
 - Backend pool configuraton (<i>choose</i> "IP address")
 - Backend address name (<i>should already be prepopulated and unchangeable</i>)
@@ -97,7 +97,7 @@ These instructions will assume the use of the wizard for creating an Azure load 
 - click NEXT to go to Inbound Rules...
 ## 4. Inbound Rules
 - Click "+" to add a load balancing rule, which will bring up a dialog box...
-- Name (<i>enter the name of the load balancing rule, perhaps something like "{LBname}-rule01"?</i>)
+- Name (<i>enter the name of the load balancing rule, perhaps something like "</i>{LBname}<i>-rule01"?</i>)
 - IP Version (<i>choose</i> "IPv4")
 - Frontend IP address (<i>choose the name of the Frontend IP Configuration added above</i>)
 - Backend pool (<i>choose the name of the Backend pool added above</i>)
@@ -106,7 +106,7 @@ These instructions will assume the use of the wizard for creating an Azure load 
 - Port (<i>specify the port number that the Oracle TNS Listener is listening upon on the Oracle DataGuard VMs - default port is 1521</i>)
 - Backend port (<i>specify the port number that the Oracle TNS Listener is listening upon on the Oracle DataGuard VMs - default port is 1521</i>)
 - Health probe (<i>select</i> "create new")
-  - Name (<i>enter the name of the health probe, perhaps something like "{LBname}-probe01"?</i>)
+  - Name (<i>enter the name of the health probe, perhaps something like "</i>{LBname}<i>-probe01"?</i>)
   - Protocol (<i>choose</i> "TCP")
   - Port (<i>enter</i> "63000")
   - Interval (<i>enter</i> "10")
@@ -118,7 +118,7 @@ These instructions will assume the use of the wizard for creating an Azure load 
 - click SAVE
 ## 4a. (optional) add Inbound Rule for testing purposes only
 - Click "+" to add a load balancing rule, which will bring up a dialog box...
-- Name (<i>enter the name of the load balancing rule, perhaps something like "{LBname}-rule02"?</i>)
+- Name (<i>enter the name of the load balancing rule, perhaps something like "</i>{LBname}<i>-rule02"?</i>)
 - IP Version (<i>choose</i> "IPv4")
 - Frontend IP address (<i>choose the name of the Frontend IP Configuration added above</i>)
 - Backend pool (<i>choose the name of the Backend pool added above</i>)
