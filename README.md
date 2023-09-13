@@ -13,19 +13,20 @@ If the database is not open or is not a PRIMARY database, then the specified net
 
 Call syntax...
 
-    oraupdown.sh ORACLE_SID [ sleepSecs [ lsnrName [ port ] ] ]
+    oraupdown.sh ORACLE_SID[,sid-list] [ sleepSecs [ lsnrName [ port ] ] ]
 
 Parameters...
-- ORACLE_SID      (mandatory - no default value) ORACLE_SID value for database
-- sleepSecs       (optional - default value: 10 seconds) interval between database checks
-- lsnrName        (optional - default value: LISTENER) name of Oracle TNS LISTENER process
-- port            (optional - default value: 63000) port for Azure LB to monitor
+- ORACLE_SID      (<i>mandatory</i> - no default value) ORACLE_SID value for database
+- sid-list        (<i>optional</i> - no default) comma-separated list of ORACLE_SID values for database instances
+- sleepSecs       (<i>optional</i> - default value: 10) interval between database checks
+- lsnrName        (<i>optional</i> - default value: LISTENER) name of Oracle TNS LISTENER process
+- port            (<i>optional</i> - default value: 63000) port for Azure LB to monitor
 
 # Suggested installation
 
 Create an entry in the "crontab" of the OS account running the script (i.e. "oracle")...
 
-    * * * * * if [[ "`ps -eaf | grep oraupdown | grep -v grep`" = "" ]]; then nohup ${HOME}/oraupdown.sh oradb01 > ${HOME}/oraupdown_out.txt 2> ${HOME}/oraupdown_err.txt; fi
+    * * * * * if [[ "`ps -eaf | grep oraupdown | grep -v grep`" = "" ]]; then nohup /home/oracle/oraupdown.sh oradb01 > /dev/null 2>&1; fi
 
 To explain this command, every minute of every day the Linux "cron" utility will check to see if the "oraupdown.sh" script is running or not.  If the script is running, then no further action need be taken.
 
